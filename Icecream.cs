@@ -10,14 +10,14 @@ using System.Windows.Forms;
 
 namespace ClassiRune
 {
-    public partial class freescape : Form
+    public partial class Icecream : Form
     {
-        public freescape()
+        public Icecream()
         {
             InitializeComponent();
         }
 
-        private void freescape_FormClosing(object sender, FormClosingEventArgs e)
+        private void REAL01SCAPE_FormClosing(object sender, FormClosingEventArgs e)
         {
             Application.Exit();
         }

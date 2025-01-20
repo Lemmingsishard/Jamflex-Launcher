@@ -29,7 +29,8 @@ namespace ClassiRune
 
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("RuneScape Internet Client\nBy Jagex Limited\nCopyright (C) 2001", "About");
+            About f = new About();
+            f.ShowDialog();
         }
     }
 }

@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Diagnostics;
+using System.IO;
 
 namespace ClassiRune
 {
@@ -70,6 +71,62 @@ namespace ClassiRune
             Altimeline f1 = new Altimeline();
             this.Hide();
             f1.ShowDialog();
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            var dlg = new OpenFileDialog();
+            dlg.Filter = "Java Archive Files (*.jar)|*.jar|All Files (*.*)|*.*";
+            dlg.Multiselect = true;
+
+            if (dlg.ShowDialog() != DialogResult.OK)
+                return;
+
+            foreach (var path in dlg.FileNames)
+            {
+                File.WriteAllText("jarpath.txt", dlg.FileName);
+                File.WriteAllText("dirpath.txt", Path.GetDirectoryName(dlg.FileName));
+            }
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            if (File.Exists("jarpath.txt") == true && File.Exists("dirpath.txt") == true)
+            {
+                string jarpath = File.ReadAllText("jarpath.txt");
+                string dirpath = File.ReadAllText("dirpath.txt");
+                System.Diagnostics.Process process = new System.Diagnostics.Process();
+                System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
+                startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+                startInfo.FileName = "cmd.exe";
+                startInfo.Arguments = $"/C cd {dirpath} && java -jar {jarpath}";
+                process.StartInfo = startInfo;
+                this.Hide();
+                process.Start();
+            } 
+            else
+            {
+                MessageBox.Show("Please Set Path");
+            }
+        }
+
+        private void button9_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process process = new System.Diagnostics.Process();
+            System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
+            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+            startInfo.FileName = "cmd.exe";
+            startInfo.Arguments = "/C explorer https://rscsundae.org/";
+            process.StartInfo = startInfo;
+            this.Hide();
+            process.Start();
+        }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+            Icecream icecream = new Icecream();
+            this.Hide();
+            icecream.Show();
         }
     }
 }
